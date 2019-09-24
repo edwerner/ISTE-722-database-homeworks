@@ -1,6 +1,7 @@
 package com.main;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class MySQLDatabase {
 	
@@ -10,9 +11,9 @@ public class MySQLDatabase {
 	private String password;
 	
 	public MySQLDatabase() {
-		url = "jdbc:mysql://simon.ist.rit.edu/networx_ser";
-		username = "330User";
-		password = "330Password";
+		url = "jdbc:mysql://localhost:3306/travel?useSSL=false";
+		username = "root";
+		password = "password";
 	}
 	
 	public void connect() {
@@ -33,5 +34,26 @@ public class MySQLDatabase {
 		} finally {
 			System.out.println("Closed database connection");
 		}
+	}
+	
+	public ArrayList<Equipment> getData(String sqlString, int numFields) {
+		
+		Statement stmnt = null;
+		ResultSet rs = null;
+		
+		try {
+			stmnt = conn.createStatement();
+		} catch (SQLException e) {
+			System.out.println("There was an error creating a SQL statement");
+		}
+		try {
+			rs = stmnt.executeQuery(sqlString);
+		} catch (SQLException e) {
+			System.out.println("There was an error executing SQL query");
+		}
+		
+		System.out.println("RESULST SET: " + rs);
+		
+		return null;
 	}
 }
