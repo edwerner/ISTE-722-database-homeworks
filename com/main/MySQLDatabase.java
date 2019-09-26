@@ -44,17 +44,16 @@ public class MySQLDatabase {
 		try {
 			stmnt = conn.createStatement();
 		} catch (SQLException e) {
-			System.out.println("There was an error creating a SQL statement: " + e);
+			System.out.println("There was an error creating SQL statement: " + e);
 		}
 		
 		try {
 			rs = stmnt.executeQuery(sqlString);
 			while (rs.next()) {
-				tempList = new ArrayList<Object>();
-				Equipment equipment = new Equipment(rs.getInt("EquipID"),
-						rs.getString("EquipmentName"), rs.getString("EquipmentDescription"),
-						rs.getInt("EquipmentCapacity"));
-				tempList.add(equipment);
+				for (int i = 1; i <= numFields; i++) {
+					System.out.println(rs.getString(i));
+					tempList.add(rs.getString(i));
+				}
 		    }
 			objectList.add(tempList);
 		} catch (SQLException e) {
