@@ -51,7 +51,6 @@ public class MySQLDatabase {
 			rs = stmnt.executeQuery(sqlString);
 			while (rs.next()) {
 				for (int i = 1; i <= numFields; i++) {
-					System.out.println(rs.getString(i));
 					tempList.add(rs.getString(i));
 				}
 		    }

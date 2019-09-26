@@ -48,10 +48,16 @@ public class Equipment {
 		this.capacity = capacity;
 	}
 	
-	public static Object fetch(int id) {
+	public static Equipment fetch(int id) {
 		String query = "SELECT * FROM equipment WHERE EquipID = " + id;
 		ArrayList<ArrayList<Object>> objectList = MySQLDatabase.getData(query, 4);
-		return objectList.get(0).get(0);
+		
+		int equipId = Integer.parseInt((String) objectList.get(0).get(0));
+		String name = (String) objectList.get(0).get(1);
+		String description = (String) objectList.get(0).get(2);
+		int capacity= Integer.parseInt((String) objectList.get(0).get(3));
+		
+		return new Equipment(equipId, name, description, capacity);
 	}
 	
 	public void put(int id) {
