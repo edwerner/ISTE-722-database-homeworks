@@ -3,6 +3,9 @@ package com.main;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * The Class MySQLDatabase
+ */
 public class MySQLDatabase {
 
 	private static Connection conn;
@@ -10,12 +13,19 @@ public class MySQLDatabase {
 	private String username;
 	private String password;
 
+	/**
+	 * Instantiates a new my SQL database
+	 * and sets database connection attributes
+	 */
 	public MySQLDatabase() {
 		url = "jdbc:mysql://localhost:3306/travel?useSSL=false";
 		username = "root";
 		password = "Gv3rn1ca";
 	}
 
+	/**
+	 * Connect to mysql driver
+	 */
 	public void connect() {
 		try {
 			conn = DriverManager.getConnection(url, username, password);
@@ -25,6 +35,9 @@ public class MySQLDatabase {
 		}
 	}
 
+	/**
+	 * Close mysql database connection
+	 */
 	public void close() {
 		try {
 			conn.close();
@@ -34,6 +47,14 @@ public class MySQLDatabase {
 		}
 	}
 
+	/**
+	 * Fetch data from mysql database
+	 * called from model class
+	 *
+	 * @param sqlString
+	 * @param numFields
+	 * @return objectlist
+	 */
 	public static ArrayList<ArrayList<Object>> getData(String sqlString, int numFields) {
 
 		Statement stmnt = null;
@@ -44,7 +65,7 @@ public class MySQLDatabase {
 		try {
 			stmnt = conn.createStatement();
 		} catch (SQLException e) {
-			System.out.println("There was an error creating SQL statement: " + e);
+			e.printStackTrace();
 		}
 
 		try {
@@ -57,12 +78,19 @@ public class MySQLDatabase {
 			objectList.add(tempList);
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("There was an error executing SQL query: " + e);
 		}
 		
 		return objectList;
 	}
 
+	/**
+	 * Sets the data for put, post
+	 * and delete model methods
+	 *
+	 * @param sqlString
+	 * @param numFields
+	 * @return int
+	 */
 	public static int setData(String sqlString, int numFields) {
 
 		int status = -1;
@@ -74,30 +102,8 @@ public class MySQLDatabase {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			status = -1;
-			System.out.println("There was an error executing SQL query: " + e);
 		}
 		
 		return status;
-	}
-
-	public static int getObjectList(ResultSet rs, int numFields) {
-
-		int result = -1;
-		ArrayList<ArrayList<Object>> objectList = new ArrayList<ArrayList<Object>>();
-		ArrayList<Object> tempList = new ArrayList<Object>();
-
-		try {
-			while (rs.next()) {
-				for (int i = 1; i <= numFields; i++) {
-					tempList.add(rs.getString(i));
-				}
-			}
-			objectList.add(tempList);
-			result = objectList.size();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		return result;
 	}
 }

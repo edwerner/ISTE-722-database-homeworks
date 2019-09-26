@@ -5,28 +5,33 @@ public class Main {
 	public static void main(String[] args) {
 		
 		// create sql database instance
-		// and connect
+		// and connect to database
 		MySQLDatabase db = new MySQLDatabase();
 		db.connect();
 		
 		// create and fetch new equipment
 		// instance by id
-		Equipment equipment = new Equipment();
-		equipment = equipment.fetch(568);
+		Equipment equipment = new Equipment(568);
+		equipment = equipment.fetch(equipment.getId());
 		
 		// close database connection
-		// and log equipment attributes
 		db.close();
+		
+		// log equipment attributes
 		logEquipmentFetch(equipment);
+		
+		System.out.println("\n");
 
-		
+		// connect to database
 		db.connect();
-//		int result = equipment.put(568, "EquipmentName", "Continental");
-//		System.out.println("Result count: " + result);
 		
+		// post new equipment instance
 		int result = equipment.post(9500, "Airbus Civilian A220", "Passenger and Cargo", 130);
-		System.out.println("Result count: " + result);
+
+		// close database connection
 		db.close();
+		
+		System.out.println(result + " records inserted");
 	}
 
 	private static void logEquipmentFetch(Equipment equipment) {

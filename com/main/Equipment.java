@@ -2,6 +2,9 @@ package com.main;
 
 import java.util.ArrayList;
 
+/**
+ * The Class Equipment
+ */
 public class Equipment {
 	
 	private int id;
@@ -9,10 +12,32 @@ public class Equipment {
 	private String description;
 	private int capacity;
 	
+	/**
+	 * Empty constructor
+	 */
 	public Equipment() {
 		
 	}
+
+	/**
+	 * Instantiates a new equipment
+	 * instance with id parameter
+	 *
+	 * @param id the id
+	 */
+	public Equipment(int id) {
+		this.id = id;
+	}
 	
+	/**
+	 * Instantiates a new equipment
+	 * instance with parameters
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param description the description
+	 * @param capacity the capacity
+	 */
 	public Equipment(int id, String name, String description, int capacity) {
 		this.id = id;
 		this.name = name;
@@ -27,7 +52,7 @@ public class Equipment {
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	
 	public String getName() {
 		return name;
 	}
@@ -52,6 +77,12 @@ public class Equipment {
 		this.capacity = capacity;
 	}
 	
+	/**
+	 * Fetch equipment instance
+	 *
+	 * @param equipId
+	 * @return equipment
+	 */
 	public Equipment fetch(int equipId) {
 		
 		// query database for equipment by id
@@ -68,6 +99,14 @@ public class Equipment {
 		return new Equipment(id, name, description, capacity);
 	}
 	
+	/**
+	 * Update existing database record
+	 *
+	 * @param equipId
+	 * @param column
+	 * @param value
+	 * @return int
+	 */
 	public int put(int equipId, String column, String value) {
 		
 		// create put query
@@ -77,17 +116,37 @@ public class Equipment {
 		return MySQLDatabase.setData(putQuery, 4);
 	}
 	
+	/**
+	 * Post new record in database
+	 *
+	 * @param id
+	 * @param name
+	 * @param description
+	 * @param capacity
+	 * @return int
+	 */
 	public int post(int id, String name, String description, int capacity) {
 		
 		// create post query
 		String postQuery = "INSERT into `equipment` (EquipID, EquipmentName, EquipmentDescription, EquipmentCapacity)" + 
 		"VALUES ('" + id + "','" + name + "','" + description + "','" + capacity + "')";
 
-		// set data
+		// post data
 		return MySQLDatabase.setData(postQuery, 4);
 	}
 	
-	public void delete(int id) {
+	/**
+	 * Delete database record
+	 *
+	 * @param id
+	 * @return int
+	 */
+	public int delete(int id) {
 		
+		// create delete query
+		String deleteQuery = "DELETE from equipment WHERE EquipID = " + id;
+		
+		// delete record
+		return MySQLDatabase.setData(deleteQuery, 4);
 	}
 }
