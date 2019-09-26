@@ -21,8 +21,10 @@ public class Main {
 
 		
 		db.connect();
-		// original name: Continental
-		int result = equipment.put(568, "EquipmentName", "Continental");
+//		int result = equipment.put(568, "EquipmentName", "Continental");
+//		System.out.println("Result count: " + result);
+		
+		int result = equipment.post(9500, "Airbus Civilian A220", "Passenger and Cargo", 130);
 		System.out.println("Result count: " + result);
 		db.close();
 	}

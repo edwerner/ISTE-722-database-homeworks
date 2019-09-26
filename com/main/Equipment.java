@@ -70,15 +70,21 @@ public class Equipment {
 	
 	public int put(int equipId, String column, String value) {
 		
-		// create update query
-		String updateQuery = "Update `equipment` SET `" + column + "` = '" + value + "'  where `EquipID` = '" + equipId +"'";
+		// create put query
+		String putQuery = "Update `equipment` SET `" + column + "` = '" + value + "'  where `EquipID` = '" + equipId +"'";
 		
 		// set data
-		return MySQLDatabase.setData(updateQuery, 4);
+		return MySQLDatabase.setData(putQuery, 4);
 	}
 	
-	public void post(Equipment equipment) {
+	public int post(int id, String name, String description, int capacity) {
 		
+		// create post query
+		String postQuery = "INSERT into `equipment` (EquipID, EquipmentName, EquipmentDescription, EquipmentCapacity)" + 
+		"VALUES ('" + id + "','" + name + "','" + description + "','" + capacity + "')";
+
+		// set data
+		return MySQLDatabase.setData(postQuery, 4);
 	}
 	
 	public void delete(int id) {
