@@ -9,6 +9,10 @@ public class Equipment {
 	private String description;
 	private int capacity;
 	
+	public Equipment() {
+		
+	}
+	
 	public Equipment(int id, String name, String description, int capacity) {
 		this.id = id;
 		this.name = name;
@@ -48,20 +52,29 @@ public class Equipment {
 		this.capacity = capacity;
 	}
 	
-	public static Equipment fetch(int id) {
-		String query = "SELECT * FROM equipment WHERE EquipID = " + id;
+	public Equipment fetch(int equipId) {
+		
+		// query database for equipment by id
+		String query = "SELECT * FROM equipment WHERE EquipID = " + equipId;
 		ArrayList<ArrayList<Object>> objectList = MySQLDatabase.getData(query, 4);
 		
-		int equipId = Integer.parseInt((String) objectList.get(0).get(0));
+		// set equipment entity attributes
+		int id = Integer.parseInt((String) objectList.get(0).get(0));
 		String name = (String) objectList.get(0).get(1);
 		String description = (String) objectList.get(0).get(2);
 		int capacity= Integer.parseInt((String) objectList.get(0).get(3));
 		
-		return new Equipment(equipId, name, description, capacity);
+		// return equipment pojo
+		return new Equipment(id, name, description, capacity);
 	}
 	
-	public void put(int id) {
+	public int put(int equipId, String column, String value) {
 		
+		// create update query
+		String updateQuery = "Update `equipment` SET `" + column + "` = '" + value + "'  where `EquipID` = '" + equipId +"'";
+		
+		// set data
+		return MySQLDatabase.setData(updateQuery, 4);
 	}
 	
 	public void post(Equipment equipment) {
