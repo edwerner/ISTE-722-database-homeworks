@@ -1,6 +1,8 @@
 package com.main;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * The Class Equipment
@@ -83,20 +85,57 @@ public class Equipment {
 	 * @param equipId
 	 * @return equipment
 	 */
-	public Equipment fetch(int equipId) {
+	public ArrayList<Equipment> fetch(int equipId) {
 		
 		// query database for equipment by id
-		String query = "SELECT * FROM equipment WHERE EquipID = " + equipId;
-		ArrayList<ArrayList<Object>> objectList = MySQLDatabase.getData(query, 4);
+		ArrayList<ArrayList<Object>> tempList = null;
+		ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
 		
+		if (equipId > -1) {
+			String query = "SELECT * FROM equipment WHERE EquipID = " + equipId;
+			tempList = MySQLDatabase.getData(query, 4);
+			System.out.println("Collection length is 1");
+		} else {
+			String query = "SELECT * FROM equipment";
+			tempList = MySQLDatabase.getData(query, true);
+			System.out.println("Collection length greater than one");
+		}
+		
+		// iterate through collection and
 		// set equipment entity attributes
-		int id = Integer.parseInt((String) objectList.get(0).get(0));
-		String name = (String) objectList.get(0).get(1);
-		String description = (String) objectList.get(0).get(2);
-		int capacity= Integer.parseInt((String) objectList.get(0).get(3));
+		for (int i = 1; i < tempList.size(); i++) {
+			int id = (int) tempList.get(i).get(0);
+			String name = (String) tempList.get(i).get(1);
+			String description = (String) tempList.get(i).get(2);
+			int capacity = (int) tempList.get(i).get(3);
+			Equipment equipment = new Equipment(id, name, description, capacity);
+			equipmentList.add(equipment);
+		}
+	
+		// return equipment array list
+		return equipmentList;
+	}
+	
+	public static String formatAsTable(List<ArrayList<String>> rows) {
 		
-		// return equipment pojo
-		return new Equipment(id, name, description, capacity);
+	    int[] maxLengths = new int[rows.get(0).size()];
+	    for (List<String> row : rows) {
+	        for (int i = 0; i < row.size(); i++) {
+	            maxLengths[i] = Math.max(maxLengths[i], row.get(i).length());
+	        }
+	    }
+
+	    StringBuilder formatBuilder = new StringBuilder();
+	    for (int maxLength : maxLengths) {
+	        formatBuilder.append("%-").append(maxLength + 2).append("s");
+	    }
+	    String format = formatBuilder.toString();
+
+	    StringBuilder result = new StringBuilder();
+	    for (List<String> row : rows) {
+	        result.append(String.format(format, row.toArray(new String[0]))).append("\n");
+	    }
+	    return result.toString();
 	}
 	
 	/**

@@ -82,6 +82,49 @@ public class MySQLDatabase {
 		
 		return objectList;
 	}
+	
+	/**
+	 * Fetch data from mysql database
+	 * called from model class
+	 *
+	 * @param sqlString
+	 * @param length
+	 * @return objectlist
+	 */
+	public static ArrayList<ArrayList<Object>> getData(String sqlString, boolean length) {
+
+		Statement stmnt = null;
+		ResultSet rs = null;
+		ArrayList<ArrayList<Object>> objectList = new ArrayList<ArrayList<Object>>();
+		ArrayList<Object> tempList = new ArrayList<Object>();
+
+		try {
+			stmnt = conn.createStatement();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			rs = stmnt.executeQuery(sqlString);
+			while (rs.next()) {
+				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+					System.out.println("METADATA: " + rs.getMetaData().getColumnLabel(i));
+					tempList.add(rs.getMetaData().getColumnLabel(i));
+					System.out.println("VALUE: " + rs.getString(i));
+					if ((int) i == rs.getType()) {
+						tempList.add(rs.getInt(i));
+					} else {
+						tempList.add(rs.getString(i));
+					}
+				}
+			}
+			objectList.add(tempList);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return objectList;
+	}
 
 	/**
 	 * Sets the data for put, post
