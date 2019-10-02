@@ -87,31 +87,29 @@ public class Equipment {
 	public ArrayList<Equipment> fetch(int equipId) {
 		
 		// query database for equipment by id
-		ArrayList<ArrayList<Object>> tempList = null;
+		ArrayList<ArrayList<Object>> tempList = new ArrayList<ArrayList<Object>>();
 		ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
 		
 		if (equipId > 4) {
 			String query = "SELECT * FROM equipment WHERE EquipID = " + equipId;
 			tempList = MySQLDatabase.getData(query, 4);
-			System.out.println("Collection length is 1");
 		} else {
 			String query = "SELECT * FROM equipment";
 			tempList = MySQLDatabase.getData(query, true);
-			System.out.println("Collection length greater than one");
 		}
 		
 		// iterate through collection and
 		// set equipment entity attributes
-		for (int i = 1; i < tempList.size(); i++) {
+		for (int i = 0; i < tempList.size(); i++) {
 			int id = (int) tempList.get(i).get(0);
 			String name = (String) tempList.get(i).get(1);
 			String description = (String) tempList.get(i).get(2);
 			int capacity = (int) tempList.get(i).get(3);
 			Equipment equipment = new Equipment(id, name, description, capacity);
 			equipmentList.add(equipment);
-		}
+		} 
 	
-		// return equipment array list
+		// return equipment arraylist
 		return equipmentList;
 	}
 	

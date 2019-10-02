@@ -95,10 +95,10 @@ public class MySQLDatabase {
 
 		Statement stmnt = null;
 		ResultSet rs = null;
-		ArrayList<Object> tempList = new ArrayList<Object>();
+		ArrayList<Object> tempList;
 		ArrayList<ArrayList<Object>> objectList = new ArrayList<ArrayList<Object>>();
 
-		if (columns == true) {
+		if (columns) {
 			try {
 				stmnt = conn.createStatement();
 			} catch (SQLException e) {
@@ -108,19 +108,13 @@ public class MySQLDatabase {
 			try {
 				rs = stmnt.executeQuery(sqlString);
 				while (rs.next()) {
+					tempList = new ArrayList<Object>();
 					for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
 						if (rs.getMetaData().getColumnTypeName(i) == "INT") {
 							tempList.add(rs.getInt(i));
-							System.out.println("INT");
 						} else {
 							tempList.add(rs.getString(i));
-							System.out.println("VARCHAR");	
 						}
-//						System.out.println("METADATA: " + rs.getMetaData().getColumnLabel(i));
-//						tempList.add(rs.getMetaData().getColumnLabel(i));
-//						System.out.println("VALUE: " + (int) Integer.parseInt(rs.getString(i)));
-						
-//						System.out.println("RS CLASS: " + rs.getString(i).getClass());
 					}
 					objectList.add(tempList);
 				}

@@ -14,11 +14,7 @@ public class Main {
 		// create and fetch new equipment
 		// instance by id
 		Equipment equipment = new Equipment();
-		ArrayList<Equipment> equipmentList = equipment.fetch(-1);
-		
-		System.out.println(equipmentList.get(0).getName());
-		
-		
+		ArrayList<Equipment> equipmentList = equipment.fetch(0);
 		
 		// close database connection
 		db.close();
