@@ -102,38 +102,21 @@ public class Equipment {
 		// iterate through collection and
 		// set equipment entity attributes
 		for (int i = 0; i < tempList.size(); i++) {
-			int id = (int) tempList.get(i).get(0);
-			String name = (String) tempList.get(i).get(1);
-			String description = (String) tempList.get(i).get(2);
-			int capacity = (int) tempList.get(i).get(3);
+			
+			// first element is column name
+			
+			// second element is column width
+			
+			int id = (int) tempList.get(i).get(2);
+			String name = (String) tempList.get(i).get(3);
+			String description = (String) tempList.get(i).get(4);
+			int capacity = (int) tempList.get(i).get(5);
 			Equipment equipment = new Equipment(id, name, description, capacity);
 			equipmentList.add(equipment);
 		} 
 	
 		// return equipment arraylist
 		return equipmentList;
-	}
-	
-	public static String formatAsTable(List<ArrayList<String>> rows) {
-		
-	    int[] maxLengths = new int[rows.get(0).size()];
-	    for (List<String> row : rows) {
-	        for (int i = 0; i < row.size(); i++) {
-	            maxLengths[i] = Math.max(maxLengths[i], row.get(i).length());
-	        }
-	    }
-
-	    StringBuilder formatBuilder = new StringBuilder();
-	    for (int maxLength : maxLengths) {
-	        formatBuilder.append("%-").append(maxLength + 2).append("s");
-	    }
-	    String format = formatBuilder.toString();
-
-	    StringBuilder result = new StringBuilder();
-	    for (List<String> row : rows) {
-	        result.append(String.format(format, row.toArray(new String[0]))).append("\n");
-	    }
-	    return result.toString();
 	}
 	
 	/**
