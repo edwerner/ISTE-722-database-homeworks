@@ -90,12 +90,13 @@ public class Equipment {
 		ArrayList<ArrayList<Object>> tempList = new ArrayList<ArrayList<Object>>();
 		ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
 		
-		if (equipId > 4) {
-			String query = "SELECT * FROM equipment WHERE EquipID = " + equipId;
-			tempList = MySQLDatabase.getData(query, 4);
-		} else {
+		if (equipId == 0) {
+			//
 			String query = "SELECT * FROM equipment";
 			tempList = MySQLDatabase.getData(query, true);
+		} else {
+			String query = "SELECT * FROM equipment WHERE EquipID = " + equipId;
+			tempList = MySQLDatabase.getData(query, 4);
 		}
 		
 		// iterate through collection and
