@@ -91,36 +91,42 @@ public class MySQLDatabase {
 	 * @param length
 	 * @return objectlist
 	 */
-	public static ArrayList<ArrayList<Object>> getData(String sqlString, boolean length) {
+	public static ArrayList<ArrayList<Object>> getData(String sqlString, boolean columns) {
 
 		Statement stmnt = null;
 		ResultSet rs = null;
-		ArrayList<ArrayList<Object>> objectList = new ArrayList<ArrayList<Object>>();
 		ArrayList<Object> tempList = new ArrayList<Object>();
+		ArrayList<ArrayList<Object>> objectList = new ArrayList<ArrayList<Object>>();
 
-		try {
-			stmnt = conn.createStatement();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-
-		try {
-			rs = stmnt.executeQuery(sqlString);
-			while (rs.next()) {
-				for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
-					System.out.println("METADATA: " + rs.getMetaData().getColumnLabel(i));
-					tempList.add(rs.getMetaData().getColumnLabel(i));
-					System.out.println("VALUE: " + rs.getString(i));
-					if ((int) i == rs.getType()) {
-						tempList.add(rs.getInt(i));
-					} else {
-						tempList.add(rs.getString(i));
-					}
-				}
+		if (columns == true) {
+			try {
+				stmnt = conn.createStatement();
+			} catch (SQLException e) {
+				e.printStackTrace();
 			}
-			objectList.add(tempList);
-		} catch (SQLException e) {
-			e.printStackTrace();
+
+			try {
+				rs = stmnt.executeQuery(sqlString);
+				while (rs.next()) {
+					for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+						if (rs.getMetaData().getColumnTypeName(i) == "INT") {
+							tempList.add(rs.getInt(i));
+							System.out.println("INT");
+						} else {
+							tempList.add(rs.getString(i));
+							System.out.println("VARCHAR");	
+						}
+//						System.out.println("METADATA: " + rs.getMetaData().getColumnLabel(i));
+//						tempList.add(rs.getMetaData().getColumnLabel(i));
+//						System.out.println("VALUE: " + (int) Integer.parseInt(rs.getString(i)));
+						
+//						System.out.println("RS CLASS: " + rs.getString(i).getClass());
+					}
+					objectList.add(tempList);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 		
 		return objectList;

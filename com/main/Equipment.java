@@ -1,7 +1,6 @@
 package com.main;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -91,7 +90,7 @@ public class Equipment {
 		ArrayList<ArrayList<Object>> tempList = null;
 		ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
 		
-		if (equipId > -1) {
+		if (equipId > 4) {
 			String query = "SELECT * FROM equipment WHERE EquipID = " + equipId;
 			tempList = MySQLDatabase.getData(query, 4);
 			System.out.println("Collection length is 1");
