@@ -17,14 +17,13 @@ public class Main {
 		ArrayList<Equipment> equipmentList = equipment.fetch(0);
 		
 		formatTable(equipmentList);
-		
-//		System.out.println(equipmentTable);
 
 		// close database connection
 		db.close();
 	}
 	
 	public static void formatTable(ArrayList<Equipment> equipmentList) {
+		
 		for (int i = 0; i < equipmentList.size(); i++) {
 		    System.out.format("%n%-10s%-30s%-30s%-10s", 
 		    		String.valueOf(equipmentList.get(i).getId()), 

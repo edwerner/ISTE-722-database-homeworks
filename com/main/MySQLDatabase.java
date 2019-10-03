@@ -22,7 +22,7 @@ public class MySQLDatabase {
 		username = "root";
 		password = "Gv3rn1ca";
 	}
-
+	
 	/**
 	 * Connect to mysql driver
 	 */
@@ -109,13 +109,18 @@ public class MySQLDatabase {
 			try {
 				rs = stmnt.executeQuery(sqlString);
 				ResultSetMetaData rsmd = rs.getMetaData();
-				int columnCount = rsmd.getColumnCount();
-				tempList = new ArrayList<Object>();
-				
-				for (int i = 1; i <= columnCount; i++ ) {
-				  tempList.add(rsmd.getColumnName(i));
-				}
-				objectList.add(tempList);
+		
+			    System.out.printf("%n%-10s%-30s%-30s%-10s", 
+			    		rsmd.getColumnName(1),
+			    		rsmd.getColumnName(2),
+			    		rsmd.getColumnName(3),
+			    		rsmd.getColumnName(4));
+			    
+			    System.out.printf("%n%-10s%-30s%-30s%-10s", 
+			    		rsmd.getColumnDisplaySize(1),
+			    		rsmd.getColumnDisplaySize(2),
+			    		rsmd.getColumnDisplaySize(3),
+			    		rsmd.getColumnDisplaySize(4));
 				
 				while (rs.next()) {
 					tempList = new ArrayList<Object>();

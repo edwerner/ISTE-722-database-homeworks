@@ -79,7 +79,7 @@ public class Equipment {
 	}
 	
 	/**
-	 * Fetch equipment instance
+	 * Fetch equipment arraylist
 	 *
 	 * @param equipId
 	 * @return equipment
@@ -100,7 +100,7 @@ public class Equipment {
 		
 		// iterate through collection and
 		// set equipment entity attributes
-		for (int i = 1; i < tempList.size(); i++) {
+		for (int i = 0; i < tempList.size(); i++) {
 			
 			int id = (int) tempList.get(i).get(0);
 			String name = (String) tempList.get(i).get(1);
