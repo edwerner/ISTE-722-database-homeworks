@@ -41,6 +41,7 @@ public class MySQLDatabase {
 	public void close() {
 		try {
 			conn.close();
+			System.out.println("\n");
 			System.out.println("Closed database connection");
 		} catch (SQLException e) {
 			e.printStackTrace();

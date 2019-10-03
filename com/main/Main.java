@@ -16,11 +16,6 @@ public class Main {
 		Equipment equipment = new Equipment();
 		ArrayList<Equipment> equipmentList = equipment.fetch(0);
 		
-		for (int i = 0; i < equipmentList.size(); i++) {
-			System.out.println("GET NAME: " + equipmentList.get(i).getName());
-		}
-		
-		
 		formatTable(equipmentList);
 		
 //		System.out.println(equipmentTable);
@@ -30,37 +25,12 @@ public class Main {
 	}
 	
 	public static void formatTable(ArrayList<Equipment> equipmentList) {
-		
-//	    int[] maxLengths = new int[rows.size()];
-//	    int counter = 0;
-//	    
-//	    for (Equipment row : rows) {
-//	    	maxLengths[counter] = Math.max(maxLengths[counter], rows.size());
-//	    	counter++;
-//	    }
-//
-//	    StringBuilder formatBuilder = new StringBuilder();
-//	    
-//	    for (int maxLength : maxLengths) {
-//	        formatBuilder.append("%-").append(maxLength + 2).append("s");
-//	    }
-//	    
-//	    String format = formatBuilder.toString();
-//	    StringBuilder result = new StringBuilder();
-	     
-//	    for (Equipment e : rows) {
-//		    System.out.format("%n%-2s%0s%-16s", String.valueOf(e.getId()), 
-//		    		e.getName(), e.getDescription(), String.valueOf(e.getCapacity()));
-//	    }
-		
-//		for (int i = 0; i < equipmentList.size(); i++) {
-//		    System.out.format("%n%-2s%0s%-16s", String.valueOf(equipmentList.get(i).getId()), 
-//		    		equipmentList.get(i).getName(), equipmentList.get(i),
-//		    		equipmentList.get(i).getDescription(), 
-//		    		String.valueOf(equipmentList.get(i).getCapacity()));
-//		}
-	    
-	    
-//	    return result.toString();
+		for (int i = 0; i < equipmentList.size(); i++) {
+		    System.out.format("%n%-10s%-30s%-30s%-10s", 
+		    		String.valueOf(equipmentList.get(i).getId()), 
+		    		equipmentList.get(i).getName(),
+		    		equipmentList.get(i).getDescription(), 
+		    		String.valueOf(equipmentList.get(i).getCapacity()));
+		}
 	}
 }

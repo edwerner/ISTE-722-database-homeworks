@@ -100,20 +100,15 @@ public class Equipment {
 		
 		// iterate through collection and
 		// set equipment entity attributes
-		for (int i = 0; i < tempList.size(); i++) {
-			if (i == 0) {
-				Equipment equipment = new Equipment();
-				equipment.setName((String) tempList.get(0).get(0));
-				equipmentList.add(equipment);
-			} else {
-				int id = (int) tempList.get(i).get(0);
-				String name = (String) tempList.get(i).get(1);
-				String description = (String) tempList.get(i).get(2);
-				int capacity = (int) tempList.get(i).get(3);
-				
-				Equipment equipment = new Equipment(id, name, description, capacity);
-				equipmentList.add(equipment);
-			}
+		for (int i = 1; i < tempList.size(); i++) {
+			
+			int id = (int) tempList.get(i).get(0);
+			String name = (String) tempList.get(i).get(1);
+			String description = (String) tempList.get(i).get(2);
+			int capacity = (int) tempList.get(i).get(3);
+			
+			Equipment equipment = new Equipment(id, name, description, capacity);
+			equipmentList.add(equipment);
 		} 
 	
 		// return equipment arraylist
