@@ -17,40 +17,39 @@ public class Main {
 		ArrayList<Equipment> equipmentList = equipment.fetch(0);
 		
 		
-		String equipmentTable = formatTable(equipmentList);
+		formatTable(equipmentList);
 		
-		System.out.println(equipmentTable);
+//		System.out.println(equipmentTable);
 
 		// close database connection
 		db.close();
 	}
 	
-	public static String formatTable(ArrayList<Equipment> rows) {
+	public static void formatTable(ArrayList<Equipment> rows) {
 		
-	    int[] maxLengths = new int[rows.size()];
-	    int counter = 0;
-	    
-	    for (Equipment row : rows) {
-	    	maxLengths[counter] = Math.max(maxLengths[counter], rows.size());
-	    	counter++;
-	    }
-
-	    StringBuilder formatBuilder = new StringBuilder();
-	    
-	    for (int maxLength : maxLengths) {
-	        formatBuilder.append("%-").append(maxLength + 2).append("s");
-	    }
-	    
-	    String format = formatBuilder.toString();
-	    StringBuilder result = new StringBuilder();
-	    
+//	    int[] maxLengths = new int[rows.size()];
+//	    int counter = 0;
+//	    
+//	    for (Equipment row : rows) {
+//	    	maxLengths[counter] = Math.max(maxLengths[counter], rows.size());
+//	    	counter++;
+//	    }
+//
+//	    StringBuilder formatBuilder = new StringBuilder();
+//	    
+//	    for (int maxLength : maxLengths) {
+//	        formatBuilder.append("%-").append(maxLength + 2).append("s");
+//	    }
+//	    
+//	    String format = formatBuilder.toString();
+//	    StringBuilder result = new StringBuilder();
+	     
 	    for (Equipment e : rows) {
-		    result.append(e.getId()).append("\n");
-		    result.append(e.getName()).append(" ");
-		    result.append(e.getDescription()).append(" ");
-		    result.append(e.getCapacity()).append(" ");
+		    System.out.format("%n%-2s%20s%-16s", String.valueOf(e.getId()), 
+		    		e.getName(), e.getDescription(), String.valueOf(e.getCapacity()));
 	    }
 	    
-	    return result.toString();
+	    
+//	    return result.toString();
 	}
 }
