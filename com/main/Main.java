@@ -16,9 +16,9 @@ public class Main {
 		Equipment equipment = new Equipment();
 		ArrayList<Equipment> equipmentList = equipment.fetch(0);
 		
-		for (Equipment e: equipmentList) {
-			System.out.println(e);
-		}
+//		for (Equipment e: equipmentList) {
+//			System.out.println(e);
+//		}
 
 		// close database connection
 		db.close();

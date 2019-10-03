@@ -91,7 +91,6 @@ public class Equipment {
 		ArrayList<Equipment> equipmentList = new ArrayList<Equipment>();
 		
 		if (equipId == 0) {
-			//
 			String query = "SELECT * FROM equipment";
 			tempList = MySQLDatabase.getData(query, true);
 		} else {
@@ -103,14 +102,19 @@ public class Equipment {
 		// set equipment entity attributes
 		for (int i = 0; i < tempList.size(); i++) {
 			
-			// first element is column name
+			String idCol = (String) tempList.get(i).get(0);
+			int id = (int) tempList.get(i).get(1);
 			
-			// second element is column width
-			
-			int id = (int) tempList.get(i).get(2);
+			String nameCol = (String) tempList.get(i).get(2);
 			String name = (String) tempList.get(i).get(3);
-			String description = (String) tempList.get(i).get(4);
-			int capacity = (int) tempList.get(i).get(5);
+			
+
+			String descCol = (String) tempList.get(i).get(4);
+			String description = (String) tempList.get(i).get(5);
+			
+			String capacityCol = (String) tempList.get(i).get(6);
+			int capacity = (int) tempList.get(i).get(7);
+			
 			Equipment equipment = new Equipment(id, name, description, capacity);
 			equipmentList.add(equipment);
 		} 

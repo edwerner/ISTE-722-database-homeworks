@@ -109,9 +109,8 @@ public class MySQLDatabase {
 				rs = stmnt.executeQuery(sqlString);
 				while (rs.next()) {
 					tempList = new ArrayList<Object>();
-					tempList.add(rs.getMetaData().getColumnName(1));
-					tempList.add(rs.getMetaData().getColumnCount());
-					for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
+					for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) { 
+						tempList.add(rs.getMetaData().getColumnName(i));
 						if (rs.getMetaData().getColumnTypeName(i) == "INT") {
 							tempList.add(rs.getInt(i));
 						} else {
