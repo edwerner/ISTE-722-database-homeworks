@@ -16,33 +16,41 @@ public class Main {
 		Equipment equipment = new Equipment();
 		ArrayList<Equipment> equipmentList = equipment.fetch(0);
 		
-//		for (Equipment e: equipmentList) {
-//			System.out.println(e);
-//		}
+		
+		String equipmentTable = formatTable(equipmentList);
+		
+		System.out.println(equipmentTable);
 
 		// close database connection
 		db.close();
 	}
 	
-	public static String formatTable(List<ArrayList<String>> rows) {
+	public static String formatTable(ArrayList<Equipment> rows) {
 		
-	    int[] maxLengths = new int[rows.get(0).size()];
-	    for (List<String> row : rows) {
-	        for (int i = 0; i < row.size(); i++) {
-	            maxLengths[i] = Math.max(maxLengths[i], row.get(i).length());
-	        }
+	    int[] maxLengths = new int[rows.size()];
+	    int counter = 0;
+	    
+	    for (Equipment row : rows) {
+	    	maxLengths[counter] = Math.max(maxLengths[counter], rows.size());
+	    	counter++;
 	    }
 
 	    StringBuilder formatBuilder = new StringBuilder();
+	    
 	    for (int maxLength : maxLengths) {
 	        formatBuilder.append("%-").append(maxLength + 2).append("s");
 	    }
+	    
 	    String format = formatBuilder.toString();
-
 	    StringBuilder result = new StringBuilder();
-	    for (List<String> row : rows) {
-	        result.append(String.format(format, row.toArray(new String[0]))).append("\n");
+	    
+	    for (Equipment e : rows) {
+		    result.append(e.getId()).append("\n");
+		    result.append(e.getName()).append(" ");
+		    result.append(e.getDescription()).append(" ");
+		    result.append(e.getCapacity()).append(" ");
 	    }
+	    
 	    return result.toString();
 	}
 }

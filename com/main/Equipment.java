@@ -98,10 +98,6 @@ public class Equipment {
 			tempList = MySQLDatabase.getData(query, 4);
 		}
 		
-		for (int i = 0; i < tempList.get(0).size(); i++) {
-			System.out.println("Columns: " + tempList.get(0).get(i));
-		}
-		
 		// iterate through collection and
 		// set equipment entity attributes
 		for (int i = 1; i < tempList.size(); i++) {
