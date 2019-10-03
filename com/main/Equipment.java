@@ -98,22 +98,18 @@ public class Equipment {
 			tempList = MySQLDatabase.getData(query, 4);
 		}
 		
+		for (int i = 0; i < tempList.get(0).size(); i++) {
+			System.out.println("Columns: " + tempList.get(0).get(i));
+		}
+		
 		// iterate through collection and
 		// set equipment entity attributes
-		for (int i = 0; i < tempList.size(); i++) {
+		for (int i = 1; i < tempList.size(); i++) {
 			
-			String idCol = (String) tempList.get(i).get(0);
-			int id = (int) tempList.get(i).get(1);
-			
-			String nameCol = (String) tempList.get(i).get(2);
-			String name = (String) tempList.get(i).get(3);
-			
-
-			String descCol = (String) tempList.get(i).get(4);
-			String description = (String) tempList.get(i).get(5);
-			
-			String capacityCol = (String) tempList.get(i).get(6);
-			int capacity = (int) tempList.get(i).get(7);
+			int id = (int) tempList.get(i).get(0);
+			String name = (String) tempList.get(i).get(1);
+			String description = (String) tempList.get(i).get(2);
+			int capacity = (int) tempList.get(i).get(3);
 			
 			Equipment equipment = new Equipment(id, name, description, capacity);
 			equipmentList.add(equipment);

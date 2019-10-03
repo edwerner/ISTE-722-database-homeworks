@@ -107,10 +107,18 @@ public class MySQLDatabase {
 
 			try {
 				rs = stmnt.executeQuery(sqlString);
+				ResultSetMetaData rsmd = rs.getMetaData();
+				int columnCount = rsmd.getColumnCount();
+				tempList = new ArrayList<Object>();
+				
+				for (int i = 1; i <= columnCount; i++ ) {
+				  tempList.add(rsmd.getColumnName(i));
+				}
+				objectList.add(tempList);
+				
 				while (rs.next()) {
 					tempList = new ArrayList<Object>();
-					for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) { 
-						tempList.add(rs.getMetaData().getColumnName(i));
+					for (int i = 1; i <= rs.getMetaData().getColumnCount(); i++) {
 						if (rs.getMetaData().getColumnTypeName(i) == "INT") {
 							tempList.add(rs.getInt(i));
 						} else {
